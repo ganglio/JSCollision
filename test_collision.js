@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
 	ball.style.left = (maxW/2-ball.offsetWidth/2)+"px";
 	var cnt=0;
 
-	$$(".container")[0].addEventListener("mousemove",function(e){
-		box.style.top = (e.offsetY-box.offsetHeight/2)+"px";
-		box.style.left = (e.offsetX-box.offsetWidth/2)+"px";
+	$$(".container")[0].addEventListener("drag",function(e){
+		box.style.top = (e.y-box.offsetHeight/2)+"px";
+		box.style.left = (e.x-box.offsetWidth/2)+"px";
 		colliding = collision(".object").colliding();
 		if (colliding.length==0)
 			$$(".object").forEach(function(e){removeClass(e,"colliding");});

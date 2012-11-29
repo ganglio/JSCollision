@@ -17,6 +17,10 @@
 	border-radius: 100%;
 }
 
+.object[data-shape=box] {
+	width: 100px;
+}
+
 .colliding {
 	background-color: rgba(255,0,0,0.25);
 	border-color: rgba(255,0,0,0.5)
