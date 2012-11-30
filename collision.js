@@ -21,16 +21,25 @@
 			} else if (o0.shape=="circle" && o1.shape=="circle") {
 				test = Math.sqrt((o0.c.x-o1.c.x)*(o0.c.x-o1.c.x)+(o0.c.y-o1.c.y)*(o0.c.y-o1.c.y))<(o0.r+o1.r);
 			} else if (o0.shape=="circle" && o1.shape=="box") {
-				test = inCircle(o0.c,o0.r,o1.p0) ||
-				       inCircle(o0.c,o0.r,o1.p1) ||
-				       inCircle(o0.c,o0.r,{x:o1.p1.x,y:o1.p0.y}) ||
-				       inCircle(o0.c,o0.r,{x:o1.p0.x,y:o1.p1.y}) ||
-				       inBox(o1.p0,o1.p1,o0.c);
-				//test = !(o0.c.x+o0.r<o1.p0.x || o0.c.x-o0.r>o1.p1.x || o0.c.y+o0.r<o1.p0.y || o0.c.y-o0.r>o1.p1.y);
+				test = distToSegment(o0.c,o1.p0,{x:o1.p1.x,y:o1.p0.y})<o0.r ||
+				       distToSegment(o0.c,o1.p0,{x:o1.p0.x,y:o1.p1.y})<o0.r ||
+				       distToSegment(o0.c,o1.p1,{x:o1.p1.x,y:o1.p0.y})<o0.r ||
+				       distToSegment(o0.c,o1.p1,{x:o1.p0.x,y:o1.p1.y})<o0.r;
 			} else return false; /* if (o0.shape=="box" && o1.shape=="circle") {
 				test = !(o1.c.x+o1.r<o0.p0.x || o1.c.x-o1.r>o0.p1.x || o1.c.y+o1.r<o0.p0.y || o1.c.y-o1.r>o0.p1.y);
 			}//*/
 			return test;
+		}
+
+		function sqr(x) { return x * x }
+		function dist(v, w) { return sqr(v.x - w.x) + sqr(v.y - w.y) }
+		function distToSegment(p, v, w) {
+			var l = dist(v, w);
+			if (l == 0) return dist(p, v);
+			var t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l;
+			if (t < 0) return dist(p, v);
+			if (t > 1) return dist(p, w);
+			return Math.sqrt(dist(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) }));
 		}
 
 		/**
