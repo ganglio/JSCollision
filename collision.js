@@ -31,8 +31,28 @@
 			return test;
 		}
 
+		/**
+		 * Calculates the square of the parameter
+		 * @param  {number} x A number
+		 * @return {number}   x*x
+		 */
 		function sqr(x) { return x * x }
+
+		/**
+		 * Calculates the squared distance between two points
+		 * @param  {Point}  v  The first point
+		 * @param  {Point}  w  The second point
+		 * @return {Number}    The squared distance
+		 */
 		function dist(v, w) { return sqr(v.x - w.x) + sqr(v.y - w.y) }
+
+		/**
+		 * Calculates the distance between a point p and a segment vw
+		 * @param  {Point}  p Point to check
+		 * @param  {Point}  v Segmenbt vertex
+		 * @param  {Point}  w Segment vertex
+		 * @return {Number}   The distance between the segment and the point
+		 */
 		function distToSegment(p, v, w) {
 			var l = dist(v, w);
 			if (l == 0) return dist(p, v);
@@ -40,28 +60,6 @@
 			if (t < 0) return dist(p, v);
 			if (t > 1) return dist(p, w);
 			return Math.sqrt(dist(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) }));
-		}
-
-		/**
-		 * Helper function to check if a point is inside a circle
-		 * @param  {object{x:,y:}}  c  The circle center
-		 * @param  {number}         r  The circle radius
-		 * @param  {object{x:,y:}}  p  The point to check
-		 * @return {boolean}           True if the point is inside the circle
-		 */
-		function inCircle(c,r,p) {
-			return Math.sqrt((c.x-p.x)*(c.x-p.x)+(c.y-p.y)*(c.y-p.y))<r;
-		}
-
-		/**
-		 * Helper function to check if a point is inside a box
-		 * @param  {object{x:,y:}}  p1  Upper left corner of the box
-		 * @param  {object{x:,y:}}  p2  Lowe right corner of the box
-		 * @param  {object{x:,y:}}  p3  The point to check
-		 * @return {boolean}            True if the point is inside the circle
-		 */
-		function inBox(p1,p2,p3) {
-			return p3.x>p1.x && p3.x<p2.x && p3.y>p1.y && p3.y<p2.y;
 		}
 
 		self.elements.forEach(function(element){
