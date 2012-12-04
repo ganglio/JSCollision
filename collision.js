@@ -1,7 +1,8 @@
 ;(function(window,document,undefined){
+	"use strict";
 
 	/**
-	 * [collision description]
+	 * Initialize collision detection on a group of elements
 	 * @param  {String}      selector   A selector describing the objects to check for collisions
 	 * @param  {HTMLElement} container  An optional container to quicken the search
 	 * @return {object}                 self (handy for chaining)
@@ -17,17 +18,15 @@
 		 */
 		window.collision.test_collision = function(o0,o1) {
 			if (o0.shape=="box" && o1.shape=="box") {
-				test = !( o0.p1.y < o1.p0.y || o0.p0.y > o1.p1.y || o0.p1.x < o1.p0.x || o0.p0.x > o1.p1.x )
+				var test = !( o0.p1.y < o1.p0.y || o0.p0.y > o1.p1.y || o0.p1.x < o1.p0.x || o0.p0.x > o1.p1.x )
 			} else if (o0.shape=="circle" && o1.shape=="circle") {
-				test = Math.sqrt((o0.c.x-o1.c.x)*(o0.c.x-o1.c.x)+(o0.c.y-o1.c.y)*(o0.c.y-o1.c.y))<(o0.r+o1.r);
+				var test = Math.sqrt((o0.c.x-o1.c.x)*(o0.c.x-o1.c.x)+(o0.c.y-o1.c.y)*(o0.c.y-o1.c.y))<(o0.r+o1.r);
 			} else if (o0.shape=="circle" && o1.shape=="box") {
-				test = distToSegment(o0.c,o1.p0,{x:o1.p1.x,y:o1.p0.y})<o0.r ||
-				       distToSegment(o0.c,o1.p0,{x:o1.p0.x,y:o1.p1.y})<o0.r ||
-				       distToSegment(o0.c,o1.p1,{x:o1.p1.x,y:o1.p0.y})<o0.r ||
-				       distToSegment(o0.c,o1.p1,{x:o1.p0.x,y:o1.p1.y})<o0.r;
-			} else return false; /* if (o0.shape=="box" && o1.shape=="circle") {
-				test = !(o1.c.x+o1.r<o0.p0.x || o1.c.x-o1.r>o0.p1.x || o1.c.y+o1.r<o0.p0.y || o1.c.y-o1.r>o0.p1.y);
-			}//*/
+				var test = distToSegment(o0.c,o1.p0,{x:o1.p1.x,y:o1.p0.y})<o0.r ||
+				           distToSegment(o0.c,o1.p0,{x:o1.p0.x,y:o1.p1.y})<o0.r ||
+				           distToSegment(o0.c,o1.p1,{x:o1.p1.x,y:o1.p0.y})<o0.r ||
+				           distToSegment(o0.c,o1.p1,{x:o1.p0.x,y:o1.p1.y})<o0.r;
+			} else return false;
 			return test;
 		}
 
@@ -36,7 +35,9 @@
 		 * @param  {number} x A number
 		 * @return {number}   x*x
 		 */
-		function sqr(x) { return x * x }
+		function sqr(x) { 
+			return x * x;
+		}
 
 		/**
 		 * Calculates the squared distance between two points
@@ -44,7 +45,9 @@
 		 * @param  {Point}  w  The second point
 		 * @return {Number}    The squared distance
 		 */
-		function dist(v, w) { return sqr(v.x - w.x) + sqr(v.y - w.y) }
+		function dist(v, w) { 
+			return sqr(v.x - w.x) + sqr(v.y - w.y);
+		}
 
 		/**
 		 * Calculates the distance between a point p and a segment vw
