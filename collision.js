@@ -35,7 +35,7 @@
 		 * @param  {number} x A number
 		 * @return {number}   x*x
 		 */
-		function sqr(x) { 
+		function sqr(x) {
 			return x * x;
 		}
 
@@ -45,8 +45,8 @@
 		 * @param  {Point}  w  The second point
 		 * @return {Number}    The squared distance
 		 */
-		function dist(v, w) { 
-			return sqr(v.x - w.x) + sqr(v.y - w.y);
+		function dist(v, w) {
+			return Math.sqrt(sqr(v.x - w.x) + sqr(v.y - w.y));
 		}
 
 		/**
@@ -59,10 +59,10 @@
 		function distToSegment(p, v, w) {
 			var l = dist(v, w);
 			if (l == 0) return dist(p, v);
-			var t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l;
+			var t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / (l*l);
 			if (t < 0) return dist(p, v);
 			if (t > 1) return dist(p, w);
-			return Math.sqrt(dist(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) }));
+			return dist(p, { x: v.x + t * (w.x - v.x), y: v.y + t * (w.y - v.y) });
 		}
 
 		self.elements.forEach(function(element){
