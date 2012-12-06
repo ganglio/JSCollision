@@ -1,10 +1,9 @@
 var Point = require("./lib/point");
 var Box = require("./lib/box");
-var math = require("./lib/math");
+var Circle = require("./lib/circle");
 
-o = new Point(0,0);
-p0 = new Point(2,1);
-p1 = new Point(3,2);
-b = new Box(p0,p1);
+p1 = new Point(0,0);
+p2 = new Point(1,1);
+c = new Circle(p1,0.5);
 
-console.log(b.distance(o));
+console.log(c.distance(p2));
