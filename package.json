@@ -1,0 +1,34 @@
+{
+	"name": "JSCollission",
+	"preferGlobal": "true",
+	"version": "0.0.1",
+	"author": "Roberto Torella <roberto.torella@gmail.com>",
+	"description": "a simple javascript collision detection library",
+	"contributors": [ 
+		{
+			"name": "Roberto Torella",
+			"email": "roberto.torella@gmail.com"
+		} 
+	],
+	"scripts": {
+		"test": "expresso test/*"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ganglio/JSCollision.git"
+	},
+	"keywords": [
+		"collision",
+		"detection"
+	],
+	"dependencies" : {
+	},
+	"analyze": false,
+	"devDependencies": {
+		"expresso" :  "0.9.x"
+	},
+	"license": "CC 3.0 BY NC",
+	"engines": {
+		"node": ">=0.6"
+	}
+}
